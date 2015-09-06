@@ -2,15 +2,15 @@
   "name": "node_kintone",
   "version": "0.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "kintone.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "js-base64": "^2.1.9",
     "node-rest-client": "~1.5.1",
-    "base64": "~2.1.0",
     "request": "~2.61.0"
   }
 }
