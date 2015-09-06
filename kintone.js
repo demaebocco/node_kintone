@@ -4,7 +4,8 @@
 
 var Kintone = function(){
 	//BASE64エンコード
-	this.base64Encode = require('base64').encode;
+	this.Base64 = require('js-base64').Base64;
+	
 	//HTTPリクエスト
 	this.request = require('request');
 	
@@ -40,7 +41,7 @@ var Kintone = function(){
 		
 		//ログイン名:パスワード」をBASE64エンコード
 		var buf = new Buffer( loginName+':'+passwd );
-		this.cybozu_authtoken = this.base64Encode(buf);
+		this.cybozu_authtoken = this.Base64.encode(buf);
 	};
 	
 	/** 1レコード取得
