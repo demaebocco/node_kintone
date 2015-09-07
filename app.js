@@ -2,8 +2,8 @@ var kintone = require('./kintone.js');
 //console.log( kintone );
 
 var subdomain = "tf-web";
-var loginName = "t_furu@tf-web.jp";
-var passwd 　　= "y8sgFJir";
+var loginName = null;
+var passwd 　　= null;
 var api_token = "koGrXyWGLS9PMKT65sg3eScSfDHGYxYt3TPP5UAd";
 kintone.setAccount(subdomain,loginName,passwd,api_token);
 

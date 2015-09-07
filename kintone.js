@@ -39,9 +39,13 @@ var Kintone = function(){
 		//サブドメインを反映
 		this.API_SERVER_URL = this.API_SERVER_URL.replace('{subdomain}',subdomain);
 		
-		//ログイン名:パスワード」をBASE64エンコード
-		var buf = new Buffer( loginName+':'+passwd );
-		this.cybozu_authtoken = this.Base64.encode(buf);
+		if(loginName != null){
+			//ログイン名:パスワード」をBASE64エンコード
+			var buf = new Buffer( loginName+':'+passwd );
+			this.cybozu_authtoken = this.Base64.encode(buf);
+		}
+		
+		return this;
 	};
 	
 	/** 1レコード取得
@@ -50,12 +54,14 @@ var Kintone = function(){
 	*/
 	this.getRecord = function(app,id,callback){
 		var url = this.API_SERVER_URL+this.API_RECORD;
+		
+		var headers = {'X-Cybozu-API-Token':this.cybozu_api_token,'Content-Type':'application/json'};
+  		if(this.cybozu_authtoken != null) headers['X-Cybozu-Authorization'] = this.cybozu_authtoken;
+  		if(this.cybozu_authtoken != null) headers['Authorization'] = 'Basic '+this.cybozu_authtoken;
+		
 		var options = {
   			url: url,
-  			headers: {'X-Cybozu-Authorization':this.cybozu_authtoken,
-  						'Authorization':'Basic '+this.cybozu_authtoken,
-  						'X-Cybozu-API-Token':this.cybozu_api_token,
-  						'Content-Type':'application/json'},
+  			headers: headers,
  	 		json:{'app':app,'id':id}
 		};
 		
@@ -78,14 +84,13 @@ var Kintone = function(){
 		if(query != null) op['query'] = query;
 		if(totalCount != null) op['totalCount'] = totalCount;
 		
-		console.log( JSON.stringify(op) );
-		
+		var headers = {'X-Cybozu-API-Token':this.cybozu_api_token,'Content-Type':'application/json'};
+  		if(this.cybozu_authtoken != null) headers['X-Cybozu-Authorization'] = this.cybozu_authtoken;
+  		if(this.cybozu_authtoken != null) headers['Authorization'] = 'Basic '+this.cybozu_authtoken;
+  		
 		var options = {
   			url: url,
-  			headers: {/*'X-Cybozu-Authorization':this.cybozu_authtoken,
-  						'Authorization':'Basic '+this.cybozu_authtoken,*/
-  						'X-Cybozu-API-Token':this.cybozu_api_token,
-  						'Content-Type':'application/json'},
+  			headers: headers,
   			json: op
   		};
 		
