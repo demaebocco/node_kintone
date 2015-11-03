@@ -95,7 +95,7 @@ var Kintone = function(){
   		};
 		
 		this.request.get(options,function(err, resp, body){
-			console.log( body );
+			// console.log( body );
 			//ここでコールバックする
     		callback( body );
 		});
