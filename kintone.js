@@ -103,3 +103,11 @@ var Kintone = function(){
 };
 
 module.exports = new Kintone();
+module.exports.create = function (options) {
+  var kintone = new Kintone();
+  kintone.setAccount(options.subdomain,
+                     options.loginName,
+                     options.password,
+                     options.api_token);
+  return kintone;
+};
